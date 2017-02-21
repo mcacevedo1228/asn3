@@ -2,31 +2,48 @@
 #include <stdlib.h>
 
 int find_employee(int eid);
+struct employee *init(char * first, char *last, int eid);
 
-struct employee 
+
+struct employee
 {
-	char first_name[20], last_name[30];	// Max of 20 chars in first name, 30 in last name
+	char *first_name;
+	char *last_name;	// Max of 20 chars in first name, 30 in last name
 	int eid;				// eid to be later occupied
-}
+};
 
 
 
 int main()
 {
-	int eid = 45;
-	find_employee(eid);
+
+	char *f = "Marc";
+	char *l = "sdf";
+	int id = 67;
+
+	struct employee *emp = init(f, l, id);
+
+
+	printf("F: %s\n", emp->first_name);
+	printf("L: %s\n", emp->last_name);
+	printf("ID: %d\n", emp->eid);	
 	return -1;
 }
 
-int find_employee(int eid)
+
+struct employee *init(char * first, char *last, int eid) 
 {
-	if (eid == 45)		 		// Test -- print number and then return 1
-	{
-		printf("The employee ID is: %d\n", eid);
-		return 1;
-	}
-	return -1;
-}
+
+	struct employee *emp = malloc(sizeof(struct employee));
+	emp->first_name = malloc(20*sizeof(char));
+	emp->last_name = malloc(30*sizeof(char));
+
+	emp->first_name = first;
+	emp->last_name = last;
+	emp->eid = eid;
+
+ 	return emp;
+} 
 
 
 
